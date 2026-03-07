@@ -71,30 +71,30 @@ This EDA project **only queries the gold layer**. Silver and bronze are not dire
 
 ```
                         ┌─────────────────────────────┐
-                        │      gold.dim_customer       │
-                        │  ───────────────────────     │
-                        │  customer_id          (PK)   │
-                        │  customer_number             │
-                        │  first_name / last_name      │
-                        │  full_name            (der)  │
-                        │  gender / marital_status     │
-                        │  birthdate                   │
-                        │  age / age_group      (der)  │
-                        │  city / country / continent  │
-                        │  25,000 rows                 │
-                        └─────────────┬───────────────-┘
+                        │      gold.dim_customer      │
+                        │  ───────────────────────    │
+                        │  customer_id          (PK)  │
+                        │  customer_number            │
+                        │  first_name / last_name     │
+                        │  full_name            (der) │
+                        │  gender / marital_status    │
+                        │  birthdate                  │
+                        │  age / age_group      (der) │
+                        │  city / country / continent │
+                        │  25,000 rows                │
+                        └─────────────┬───────────────┘
                                       │ customer_id
                                       │
 ┌─────────────────────────┐  ┌────────┴──────────────────┐  ┌──────────────────────────┐
-│    gold.dim_product     │  │      gold.fact_sales       │  │    gold.fact_returns      │
-│  ─────────────────────  │  │  ──────────────────────    │  │  ──────────────────────   │
-│  product_id       (PK)  │  │  order_number       (PK)   │  │  return_id         (PK)   │
-│  product_number         │  │  product_id         (FK) ──┘  │  order_number      (FK) ──┘
-│  product_name           │  │  customer_id        (FK)   │  │  return_date              │
-│  cost                   │◄─┤  store_id           (FK)   │  │  return_year/month  (der) │
-│  product_line           │  │  order_date               │  │  return_reason            │
-│  category / subcategory │  │  order_year/month   (der) │  │  return_amount            │
-│  maintenance_required   │  │  quantity / price         │  │  26,967 rows              │
+│    gold.dim_product     │  │      gold.fact_sales      │  │    gold.fact_returns     │
+│  ─────────────────────  │  │  ──────────────────────   │  │  ──────────────────────  │
+│  product_id       (PK)  │  │  order_number       (PK)  │  │  return_id         (PK)  │
+│  product_number         │  │  product_id         (FK)──┘  │  order_number      (FK)──┘
+│  product_name           │  │  customer_id        (FK)  │  │  return_date             │
+│  cost                   │◄─┤  store_id           (FK)  │  │  return_year/month  (der)│
+│  product_line           │  │  order_date               │  │  return_reason           │
+│  category / subcategory │  │  order_year/month   (der) │  │  return_amount           │
+│  maintenance_required   │  │  quantity / price         │  │  26,967 rows             │
 │  5,000 rows             │  │  sales_amount             │  └──────────────────────────┘
 └─────────────────────────┘  │  days_to_ship       (der) │
                              │  delivery_status    (der) │
@@ -133,16 +133,16 @@ fact_returns ──► fact_sales    ON fr.order_number = fs.order_number
 │                                                                         │
 │  Phase 1          Phase 2          Phase 3          Phase 4             │
 │  DATABASE    ──►  DIMENSIONS  ──►  DATA        ──►  MEASURES            │
-│  EXPLORATION      EXPLORATION      EXPLORATION       EXPLORATION         │
+│  EXPLORATION      EXPLORATION      EXPLORATION       EXPLORATION        │
 │                                                           │             │
 │                                                           ▼             │
 │                                           Phase 5    Phase 6            │
 │                                           MAGNITUDES  RANKING           │
 │                                                                         │
-│  Structural       Domain            Quality          Statistics          │
+│  Structural       Domain            Quality          Statistics         │
 │  Discovery        Knowledge         Sign-off         Baseline           │
 │                                                                         │
-│                                           Volume &    Top/Bottom         │
+│                                           Volume &    Top/Bottom        │
 │                                           Scale       Performers        │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
