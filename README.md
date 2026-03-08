@@ -547,8 +547,3 @@ You can run all sections within a file at once (F5 in SSMS) or execute individua
 - For larger environments, consider materializing the gold views into indexed tables before running the ranking queries.
 
 ---
-
-> **Project:** Zenith Global Data Warehouse — EDA Phase
-> **Database:** Zenith-Global-Data-Warehouse
-> **Layer:** gold (star schema views)
-> **Built as part of:** End-to-end Data Analyst Portfolio Project
